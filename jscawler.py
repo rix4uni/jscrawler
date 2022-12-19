@@ -34,15 +34,25 @@ def crawl_js_links(url):
                 # If the link starts with a \/\/ remove all backslashes
                 elif link.startswith('\\'):
                     link = 'https:' + link.replace("\\", "")
+                elif link.startswith('https'):
+                    pass
+                # If the link starts with a blank
+                else:
+                    link = 'https://' + domain_name + '/' + link
                 # Print the link
                 print(link)
 # Open the file and read the URLs
 with open(sys.argv[1], 'r') as f:
     lines = f.readlines()
-    # Create a thread pool with 50 threads
-    with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
-        # Iterate over the URLs
-        for url in lines:
-            url = url.strip()
-            # Submit the task to the thread pool
-            executor.submit(crawl_js_links, url)
+    try:
+        # Create a thread pool with 50 threads
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            # Iterate over the URLs
+            for url in lines:
+                url = url.strip()
+                # Submit the task to the thread pool
+                executor.submit(crawl_js_links, url)
+    except KeyboardInterrupt:
+        exit(0)
+    except:
+        exit(127)
