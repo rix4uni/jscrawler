@@ -45,7 +45,7 @@ def crawl_js_links(url):
 with open(sys.argv[1], 'r') as f:
     lines = f.readlines()
     try:
-        # Create a thread pool with 50 threads
+        # Create a thread pool with 8 threads
         with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
             # Iterate over the URLs
             for url in lines:
