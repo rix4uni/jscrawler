@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-https://github.com/rix4uni/jscrawler.git
+git clone https://github.com/rix4uni/jscrawler.git
 cd jscrawler
 pip3 install -r requirements.txt
 ```
