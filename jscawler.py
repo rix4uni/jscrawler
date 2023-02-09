@@ -55,4 +55,4 @@ with open(sys.argv[1], 'r') as f:
     except KeyboardInterrupt:
         exit(0)
     except:
-        exit(127)
+        pass
