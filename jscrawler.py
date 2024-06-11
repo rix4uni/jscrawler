@@ -11,11 +11,11 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 __version__ = "v0.0.1"  # Current Version of jscrawler
 
 parser = argparse.ArgumentParser(description='jscrawler - Fetches JavaScript links from a list of URLs or live subdomains.')
-parser.add_argument('--timeout', default=5, help='Timeout (in seconds) for http client (default 15)')
+parser.add_argument('--timeout', default=5, help='Timeout (in seconds) for http client (default 5)')
 parser.add_argument('--complete', action='store_true', help='Get Complete URL (default false)')
 parser.add_argument('-o', '--output', help='Output file to save results')
 parser.add_argument('-v', '--verbose', action='store_true', help='Display info of what is going on')
-parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
+parser.add_argument('--version', action='version', version='%(prog)s ' + __version__, help='Show Current Version of jscrawler')
 args = parser.parse_args()
 
 for base_url in sys.stdin:
