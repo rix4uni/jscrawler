@@ -9,7 +9,7 @@ pip3 install -r requirements.txt
 
 ## Usage
 ```
-usage: jscrawler.py [-h] [--timeout TIMEOUT] [--complete] [-o OUTPUT] [-v] [--version]
+usage: jscrawler.py [-h] [--timeout TIMEOUT] [--complete] [-o OUTPUT] [-v] [-nc] [--silent] [--version]
 
 jscrawler - Fetches JavaScript links from a list of URLs or live subdomains.
 
@@ -20,6 +20,8 @@ options:
   -o OUTPUT, --output OUTPUT
                         Output file to save results
   -v, --verbose         Display info of what is going on
+  -nc, --no-color       Print without ANSI color codes
+  --silent              Run without printing the banner
   --version             Show Current Version of jscrawler
 ```
 
