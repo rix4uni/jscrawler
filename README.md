@@ -7,6 +7,22 @@ cd jscrawler
 pip3 install -r requirements.txt
 ```
 
+## Usage
+```
+usage: jscrawler.py [-h] [--timeout TIMEOUT] [--complete] [-o OUTPUT] [-v] [--version]
+
+jscrawler - Fetches JavaScript links from a list of URLs or live subdomains.
+
+options:
+  -h, --help            show this help message and exit
+  --timeout TIMEOUT     Timeout (in seconds) for http client (default 5)
+  --complete            Get Complete URL (default false)
+  -o OUTPUT, --output OUTPUT
+                        Output file to save results
+  -v, --verbose         Display info of what is going on
+  --version             Show Current Version of jscrawler
+```
+
 ## Example usages
 
 Single URLs:
