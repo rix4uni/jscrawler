@@ -9,7 +9,12 @@ pip3 install -r requirements.txt
 
 ## Example usages
 
-Multiple urls:
+Single URLs:
 ```
-python3 jscrawler.py subs.txt
+echo "https://www.dell.com" | python3 jscrawler.py
+```
+
+Multiple URLs:
+```
+cat live-subs.txt | python3 jscrawler.py
 ```
