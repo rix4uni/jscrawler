@@ -1,58 +1,28 @@
 import sys
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
 import re
-import concurrent.futures
+from urllib.parse import urljoin
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def crawl_js_links(url):
-    parsed_url = urlparse(url)
+for base_url in sys.stdin:
+	base_url = base_url.rstrip()
 
-    # The domain name is the netloc attribute of the parsed URL
-    domain_name = parsed_url.netloc
+	response = requests.get(base_url, timeout=5, verify=False)
+	soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Make a request to the website
-    response = requests.get(url)
-    # Parse the HTML content
-    soup = BeautifulSoup(response.text, 'html.parser')
-    # Find all the script tags
-    script_tags = soup.find_all('script')
-    # Iterate over the script tags
-    for tag in script_tags:
-        # Check if the tag has a src attribute
-        if 'src' in tag.attrs:
-            # Get the link from the src attribute
-            link = tag['src']
-            # Check if the link ends with .js
-            if re.search('.js',link):
-                # If the link starts with a dual //
-                if link.startswith('//'):
-                    link = 'https:' + link
-                # If the link starts with a single /
-                elif link.startswith('/'):
-                    link = 'https://' + domain_name + link
-                # If the link starts with a \/\/ remove all backslashes
-                elif link.startswith('\\'):
-                    link = 'https:' + link.replace("\\", "")
-                elif link.startswith('https'):
-                    pass
-                # If the link starts with a blank
-                else:
-                    link = 'https://' + domain_name + '/' + link
-                # Print the link
-                print(link)
-# Open the file and read the URLs
-with open(sys.argv[1], 'r') as f:
-    lines = f.readlines()
-    try:
-        # Create a thread pool with 8 threads
-        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-            # Iterate over the URLs
-            for url in lines:
-                url = url.strip()
-                # Submit the task to the thread pool
-                executor.submit(crawl_js_links, url)
-    except KeyboardInterrupt:
-        exit(0)
-    except:
-        pass
+	# # Convert the BeautifulSoup object to a string
+	soup_str = str(soup)
+
+	# # Use the regex pattern to find all matches
+	links = re.findall(r"['\"]([^'\"]*\.js[^'\"]*)['\"]", soup_str)
+
+	# Filter and print only those links that contain .js
+	for link in links:
+	    if '.js' in link:
+	        # Remove surrounding quotes
+	        link = link.strip('\'"')
+	        # Convert relative URLs to absolute URLs
+	        full_url = urljoin(base_url, link)
+	        print(full_url)
