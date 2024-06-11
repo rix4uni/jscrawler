@@ -95,14 +95,16 @@ for base_url in sys.stdin:
             if args.complete:
                 # Convert relative URLs to absolute URLs
                 full_url = urljoin(base_url, link)
-                print(f"{PURPLE}{full_url}{ENDC}")
+                if not '.json' in full_url:
+                    print(f"{PURPLE}{full_url}{ENDC}")
 
-                if args.output:
-                    with open(args.output, 'a') as file:
-                        file.write(full_url + '\n')
+                    if args.output:
+                        with open(args.output, 'a') as file:
+                            file.write(full_url + '\n')
             else:
-                print(f"{PURPLE}{link}{ENDC}")
+                if not '.json' in link:
+                    print(f"{PURPLE}{link}{ENDC}")
 
-                if args.output:
-                    with open(args.output, 'a') as file:
-                        file.write(link + '\n')
+                    if args.output:
+                        with open(args.output, 'a') as file:
+                            file.write(link + '\n')
