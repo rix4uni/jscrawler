@@ -1,4 +1,6 @@
-# jscrawler
+## jscrawler
+
+Fetches javascript file from a list of URLS or subdomains.
 
 ## Installation
 ```
