@@ -6,12 +6,12 @@ Fetches javascript file from a list of URLS or subdomains.
 ```
 git clone https://github.com/rix4uni/jscrawler.git
 cd jscrawler
-pip3 install -r requirements.txt
+python3 setup.py install
 ```
 
 ## Usage
 ```
-usage: jscrawler.py [-h] [--timeout TIMEOUT] [--complete] [-o OUTPUT] [-v] [-nc] [--silent] [--version]
+usage: jscrawler [-h] [--timeout TIMEOUT] [--complete] [-o OUTPUT] [-v] [-nc] [--silent] [--version]
 
 jscrawler - Fetches JavaScript links from a list of URLs or live subdomains.
 
@@ -31,10 +31,10 @@ options:
 
 Single URLs:
 ```
-echo "https://www.dell.com" | python3 jscrawler.py
+echo "https://www.dell.com" | jscrawler
 ```
 
 Multiple URLs:
 ```
-cat live-subs.txt | python3 jscrawler.py
+cat live-subs.txt | jscrawler
 ```
