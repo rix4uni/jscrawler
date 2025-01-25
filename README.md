@@ -9,6 +9,11 @@ cd jscrawler
 python3 setup.py install
 ```
 
+## pip
+```
+pip install jscrawler
+```
+
 ## pipx
 Quick setup in isolated python environment using [pipx](https://pypa.github.io/pipx/)
 ```
